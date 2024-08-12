@@ -21,7 +21,7 @@ function updateNote() {
       showSuccessAlert.value = false
       // 在提示消失後再跳轉頁面
       router.push({ name: 'grid' })
-    }, 00)
+    }, 1500)
   }
 }
 const clearPlaceholder = () =>{
