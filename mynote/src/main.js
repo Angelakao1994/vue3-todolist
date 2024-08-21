@@ -5,7 +5,6 @@ import { createPinia } from 'pinia'
 import router from './router'
 import axios from "axios";
 import VueAxios from "vue-axios";
-
 // 引入 Vee Validate 元件跟功能
 import {Form, Field, ErrorMessage, defineRule, configure} from 'vee-validate'
 // 引入 Vee Validate 全部所有驗證規則

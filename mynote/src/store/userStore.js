@@ -1,22 +1,23 @@
 import { defineStore } from "pinia";
 import axios from "axios";
 
-
+const apiUrl = "http://localhost:3000";
 export const useUserStore = defineStore("users", {
   state: () => ({
     name: "",
     email: "",
     password: "",
+    isLoggedIn: false,
   }),
   actions: {
     // 註冊
     async signup() {
       try {
-        const { data: users } = await axios.get("/api/user");
+        const { data: users } = await axios.get(`${apiUrl}/user`);
         const maxId = users.reduce((max, user) => Math.max(max, user.id), 0);
         const newId = maxId + 1;
 
-        await axios.post("/api/user", {
+        await axios.post(`${apiUrl}/user`, {
           id: newId,
           name: this.name,
           email: this.email,
@@ -35,7 +36,7 @@ export const useUserStore = defineStore("users", {
         const userExists = await this.checkUserExists(this.email);
         if (!userExists) return false;
 
-        const { data: users } = await axios.get("/api/user");
+        const { data: users } = await axios.get(`${apiUrl}/user`);
         const user = users.find(
           (user) => user.email === this.email && user.password === this.password
         );
@@ -74,7 +75,9 @@ export const useUserStore = defineStore("users", {
     // 檢查用戶是否存在
     async checkUserExists(email) {
       try {
-        const { data: users } = await axios.get("/api/user");
+        const { data: users } = await axios.get(`${apiUrl}/user`);
+        console.log("Fetched users:", users);
+        console.log("Type of users:", Array.isArray(users));
         return users.some((user) => user.email === email);
       } catch (error) {
         console.log(error);
@@ -110,7 +113,7 @@ export const useUserStore = defineStore("users", {
         }
         try {
           // 提交表單
-          const res = await axios.post("/api/user", {
+          const res = await axios.post(`${apiUrl}/user`, {
             name: this.name,
             email: this.email,
             password: this.password,
