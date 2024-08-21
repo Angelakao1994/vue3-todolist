@@ -2,11 +2,12 @@
 import { ref } from 'vue'
 import { noteStore } from '../store/noteStore'
 const todoStore = noteStore()
+
 </script>
 
 <template>
   <div class="container space-grotesk">   
-    <h2>My Note Grid</h2>
+    <h2>全部</h2>
     <div class="row my-5">
       <div v-for="note in todoStore.notes" class="col-3">
         <router-link :to="{name:'edit', params:{id: note.id}}">

@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-
+import axios from "axios";
 
 export const noteStore = defineStore("notes", {
   // 定義狀態(變數)
@@ -7,30 +7,26 @@ export const noteStore = defineStore("notes", {
     notes: [
       {
         id: 1,
-        title: "Writing Homework",
-        content: "Math",
-        date: new Date().toISOString().split("T")[0],
+        title: "寫作業",
+        content: "數學",
         isPinned: false,
       },
       {
         id: 2,
-        title: "Reading Book",
-        content: "React Tool Book",
-        date: new Date().toISOString().split("T")[0],
+        title: "讀書",
+        content: "React工具書",
         isPinned: true,
       },
       {
         id: 3,
-        title: "Review",
-        content: "Vue Review",
-        date: new Date().toISOString().split("T")[0],
+        title: "複習",
+        content: "Vue練習",
         isPinned: false,
       },
       {
         id: 4,
-        title: "Exercise",
-        content: "Swimming",
-        date: new Date().toISOString().split("T")[0],
+        title: "運動",
+        content: "高爾夫",
         isPinned: true,
       },
     ],
@@ -49,36 +45,38 @@ export const noteStore = defineStore("notes", {
   },
   // 變更資料用
   actions: {
-    addNote(title, content, date) {
+    addNote(title, content) {
       if (!title) return;
       this.notes.push({
         id: Math.floor(Math.random() * 100000),
         title,
         content,
-        date,
         isPinned: false,
       });
     },
+    // 切換icon釘選狀態
     markedPin(id) {
       const i = this.notes.findIndex((note) => note.id === id);
       if (i !== -1) {
         this.notes[i].isPinned = !this.notes[i].isPinned;
       }
     },
-    editNote(id, title, content, date) {
+    // 編輯內容
+    editNote(id, title, content) {
       const i = this.notes.findIndex((note) => note.id === id);
       if (i !== -1) {
         this.notes[i].title = title;
         this.notes[i].content = content;
-        this.notes[i].date = date; // 更新日期
       }
     },
+    // 刪除項目
     deleteNote(id) {
       const i = this.notes.findIndex((note) => note.id === id);
       if (i !== -1) {
         this.notes.splice(i, 1);
       }
     },
+    // 搜尋
     searchNotes(keyword) {
       this.keyword = keyword.toLowerCase();
       this.searchResults = this.notes.filter(
@@ -87,9 +85,6 @@ export const noteStore = defineStore("notes", {
           note.content.toLowerCase().includes(this.keyword)
       );
       console.log(this.searchResults);
-    },
-    getNotesByDate(date) {
-      return this.notes.filter(note => note.date === date);
     },
   },
 });

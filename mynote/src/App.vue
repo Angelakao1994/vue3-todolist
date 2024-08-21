@@ -1,7 +1,7 @@
 <script setup>
 import ToolBar from './components/toolBar.vue';
 import NoteList from './components/noteList.vue'
-import Calendar from './components/calendar.vue'
+import Login from './components/login.vue'
 </script>
 
 <template>

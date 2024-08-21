@@ -1,11 +1,13 @@
 <script setup>
 import { noteStore } from '../store/noteStore'
 const noteStore3 = noteStore()
+
+
 </script>
 <template>
-    
+    <h2>搜尋結果</h2>
     <main id="result" class="container d-flex justify-content-between pt-5 align-start flex-wrap space-grotesk">
-        <h2 v-if="noteStore3.searchResults.length == 0">No related data found</h2>
+        <h2 v-if="noteStore3.searchResults.length == 0">找不到此項目</h2>
         <div v-for="notes in noteStore3.searchResults" class="card mb-3" style="width: 30%; height: 15rem;">
             <router-link :to="{ name: 'edit', params: { id: notes.id } }">
                 <div class="card-body">
