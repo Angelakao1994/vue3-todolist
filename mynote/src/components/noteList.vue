@@ -29,7 +29,7 @@ watch(() => userStore.isLoggedIn, (newVal) => {
     router.push({ name: 'login' })
   }
 })
-
+// 使用emit傳遞參數給父組件
 const selectNote = (note) => {
   emit('selectNote', 'note');
 };
@@ -77,7 +77,7 @@ const confirmDelete = () => {
         <h2 class="accordion-header" id="headingOne">
           <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseOne">
-            <i class="fa-solid fa-star"></i> 重要事項
+            <i class="fa-solid fa-star"></i> 已完成事項
           </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
@@ -98,7 +98,7 @@ const confirmDelete = () => {
         <h2 class="accordion-header" id="headingTwo">
           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-            <i class="fa-solid fa-layer-group"></i> 所有事項
+            <i class="fa-solid fa-layer-group"></i> 待辦事項
           </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"

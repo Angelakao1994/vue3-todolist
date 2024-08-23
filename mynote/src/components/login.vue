@@ -15,6 +15,7 @@ const errors = ref({})
 // 密碼驗證規則來自 userStore.js
 const isPassword = userStore.isPassword;
 
+// 在login 中使用async await來處理異步操作
 const login = async (e) => {
     event.preventDefault() // 取消預設表單提交
     // 表單驗證
@@ -45,7 +46,7 @@ const login = async (e) => {
 
         // 使用 userStore.login() 方法來處理登入(userStore.js)
         const loginSuccessful = await userStore.login()
-
+        
         if (loginSuccessful) {
             // 登入成功, 更新noteList及跳至會員主頁面
             alert("歡迎登入")
@@ -54,7 +55,7 @@ const login = async (e) => {
             router.push('/')
         } else {
             // 登入失敗，跳至註冊頁面
-            alert("用戶不存在，請先註冊")
+            alert("無此用戶，請先註冊")
             router.push({ name: 'signup' })
         }
     } else {
