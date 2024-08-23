@@ -119,7 +119,6 @@ const confirmDelete = () => {
     <!-- 手風琴 -->
   </div>
   <div v-else class="container space-grotesk">
-    <h5>請先登入才能看到側邊內容</h5>
   </div>
   <!-- 刪除視窗modal -->
   <div class="modal fade" tabindex="-1" id="deleteModal">
